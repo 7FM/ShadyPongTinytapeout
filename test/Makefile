@@ -6,6 +6,17 @@ SIM ?= icarus
 TOPLEVEL_LANG ?= verilog
 SRC_DIR = $(PWD)/../src
 PROJECT_SOURCES = project.v
+# ShadyPong sources
+PROJECT_SOURCES += ShadyPong/config.sv
+PROJECT_SOURCES += ShadyPong/vga_timings.sv
+PROJECT_SOURCES += ShadyPong/src/top.sv
+PROJECT_SOURCES += ShadyPong/src/vga_connector.sv
+PROJECT_SOURCES += ShadyPong/src/pong/ballDrawChecker.sv
+PROJECT_SOURCES += ShadyPong/src/pong/nextBoundedPosPipelined.sv
+PROJECT_SOURCES += ShadyPong/src/pong/playerDrawChecker.sv
+PROJECT_SOURCES += ShadyPong/src/pong/pong_game_engine_one_hot.sv
+PROJECT_SOURCES += ShadyPong/src/pong/pong_game_engine.sv
+PROJECT_SOURCES += ShadyPong/src/pong/YPosChecker.sv
 
 ifneq ($(GATES),yes)
 

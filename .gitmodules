@@ -1,0 +1,3 @@
+[submodule "src/ShadyPong"]
+	path = src/ShadyPong
+	url = https://github.com/7FM/ShadyPong

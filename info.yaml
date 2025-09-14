@@ -26,7 +26,7 @@ project:
     - "ShadyPong/src/pong/nextBoundedPosPipelined.sv"
     - "ShadyPong/src/pong/playerDrawChecker.sv"
     - "ShadyPong/src/pong/pong_game_engine_one_hot.sv"
-    - "ShadyPong/src/pong/pong_game_engine.sv"
+    - "ShadyPong/src/pong/pong_pixel_engine.sv"
     - "ShadyPong/src/pong/YPosChecker.sv"
 
 # The pinout of your project. Leave unused pins blank. DO NOT delete or add any pins.

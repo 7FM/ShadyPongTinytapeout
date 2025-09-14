@@ -33,14 +33,14 @@ module tt_um_7FM_ShadyPong (
   assign player2YUp = ui_in[2];
   assign player2YDown = ui_in[3];
 
-  assign uo_out = {R, G};
-  // We need all the outputs we can get
-  assign uio_oe = {8{1'b1}};
-  // Two unused outputs
-  assign uio_out = {B, hsync, vsync, 2'b0};
-
   // TinyVGA PMOD
   assign uo_out = {hsync, B[0], G[0], R[0], vsync, B[1], G[1], R[1]};
+
+  // We need all the outputs we can get
+  assign uio_oe = {8{1'b1}};
+  // Connect the remaining VGA color signals
+  assign uio_out = {B[2], G[2], R[2], B[3], G[3], R[3], 2'b0};
+
 
   top shadyPong(
     .CLK(clk),

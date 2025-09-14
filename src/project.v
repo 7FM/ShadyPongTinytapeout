@@ -33,18 +33,28 @@ module tt_um_7FM_ShadyPong (
   assign player2YUp = ui_in[2];
   assign player2YDown = ui_in[3];
 
+  // Force
+  wire forceFallback = ui_in[4];
+
   // TinyVGA PMOD
   assign uo_out = {hsync, B[0], G[0], R[0], vsync, B[1], G[1], R[1]};
 
-  // We need all the outputs we can get
-  assign uio_oe = {8{1'b1}};
-  // Connect the remaining VGA color signals
-  assign uio_out = {B[2], G[2], R[2], B[3], G[3], R[3], 2'b0};
+  // Dummy outputs
+  assign uio_out = 8'b0;
+  // We need more inputs
+  assign uio_oe = {8{1'b0}};
 
+  reg [3:0] ballSpeed, playerSpeed;
+  always @(posedge clk) begin
+    ballSpeed <= forceFallback ? 4 : uio_in[3:0];
+    playerSpeed <= forceFallback ? 4 : uio_in[7:4];
+  end
 
   top shadyPong(
     .CLK(clk),
     .rst_n(rst_n),
+    .ballSpeed(ballSpeed),
+    .playerSpeed(playerSpeed),
     .vga_h_sync(hsync),
     .vga_v_sync(vsync),
     .vga_R(R),
@@ -55,6 +65,6 @@ module tt_um_7FM_ShadyPong (
 
 
   // List all unused inputs to prevent warnings
-  wire _unused = &{ena, clk, rst_n, 1'b0};
+  wire _unused = &{ena, ui_in[7:5], 1'b0};
 
 endmodule

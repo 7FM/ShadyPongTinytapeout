@@ -15,7 +15,7 @@ PROJECT_SOURCES += ShadyPong/src/pong/ballDrawChecker.sv
 PROJECT_SOURCES += ShadyPong/src/pong/nextBoundedPosPipelined.sv
 PROJECT_SOURCES += ShadyPong/src/pong/playerDrawChecker.sv
 PROJECT_SOURCES += ShadyPong/src/pong/pong_game_engine_one_hot.sv
-PROJECT_SOURCES += ShadyPong/src/pong/pong_game_engine.sv
+PROJECT_SOURCES += ShadyPong/src/pong/pong_pixel_engine.sv
 PROJECT_SOURCES += ShadyPong/src/pong/YPosChecker.sv
 
 ifneq ($(GATES),yes)

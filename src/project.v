@@ -16,10 +16,43 @@ module tt_um_example (
     input  wire       rst_n     // reset_n - low to reset
 );
 
-  // All output pins must be assigned. If not used, assign to 0.
-  assign uo_out  = ui_in + uio_in;  // Example: ou_out is the sum of ui_in and uio_in
-  assign uio_out = 0;
-  assign uio_oe  = 0;
+  // VGA signals
+  wire hsync;
+  wire vsync;
+  wire [3:0] R;
+  wire [3:0] G;
+  wire [3:0] B;
+
+  // User input
+  wire player1YUp, player1YDown, player2YUp, player2YDown;
+  wire [3:0] btns;
+  assign btns = {player1YUp, player1YDown, player2YUp, player2YDown};
+
+  assign player1YUp = ui_in[0];
+  assign player1YDown = ui_in[1];
+  assign player2YUp = ui_in[2];
+  assign player2YDown = ui_in[3];
+
+  assign uo_out = {R, G};
+  // We need all the outputs we can get
+  assign uio_oe = {8{1'b1}};
+  // Two unused outputs
+  assign uio_out = {B, hsync, vsync, 2'b0};
+
+  // TinyVGA PMOD
+  assign uo_out = {hsync, B[0], G[0], R[0], vsync, B[1], G[1], R[1]};
+
+  top shadyPong(
+    .CLK(clk),
+    .rst_n(rst_n),
+    .vga_h_sync(hsync),
+    .vga_v_sync(vsync),
+    .vga_R(R),
+    .vga_G(G),
+    .vga_B(B),
+    .btns(btns)
+  );
+
 
   // List all unused inputs to prevent warnings
   wire _unused = &{ena, clk, rst_n, 1'b0};
